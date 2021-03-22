@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-let dropProductId = ['2', '4', '5', '10'];
+let dropProductId = ['0', '2', '4', '5', '10'];
 let dropStyleId = ['7', '8', '9', '10', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '47', '48', '49', '50', '51', '52'];
 
 //Read and write products.csv
@@ -44,7 +44,7 @@ let dropStyleId = ['7', '8', '9', '10', '17', '18', '19', '20', '21', '22', '23'
 
 //read and write styles.csv
 
-// fs.readFile('./rawData/styles.csv', 'utf8', (err, data) => {
+// fs.readFile('/Users/kevinliu/Desktop/SDC/rawData/styles.csv', 'utf8', (err, data) => {
 //   if (err) throw err;
 
 //   const rows = data.split('\n');
@@ -52,11 +52,13 @@ let dropStyleId = ['7', '8', '9', '10', '17', '18', '19', '20', '21', '22', '23'
 //   dataEntrys = dataEntrys.filter(data => {
 //     return dropProductId.indexOf(data[1]) === -1;
 //   })
-//   dataEntrys.forEach(entry => {
-//     return entry.splice(3, 1, null);
+//   dataEntrys.forEach(row => {
+//     if (row[3] === 'null') {
+//       row[3] = '';
+//     }
 //   })
 //   const clean = dataEntrys.map(entry => entry.join(',')).join('\n');
-//   fs.writeFile('./cleanData/styles_clean.csv', clean, (err) => {
+//   fs.writeFile('/Users/kevinliu/Desktop/SDC/cleanData/styles_clean.csv', clean, (err) => {
 //     if (err) throw err;
 //     console.log('File created');
 //   })
@@ -157,30 +159,21 @@ let dropStyleId = ['7', '8', '9', '10', '17', '18', '19', '20', '21', '22', '23'
 // })
 
 
-// const readPhotosStream = fs.createReadStream('./photos_clean.csv', {encoding:'utf8', start:0, end:1000000000});
-// readPhotosStream.on('data', (data) => {
-//   const rows = data.split('\n');
-//   const colName = rows[0];
-//   const dataEntrys = rows.slice(1);
-//   const idRegex = /^\d+,/g;
-//   let rmID = dataEntrys.map(entry => entry.replace(idRegex, ''));
-//   console.log(rmID)
-//   const validate = rmID.filter(row => row[2] !== undefined && row[2].length > 10);
-//   validate.forEach(row => {
-//     const lastIndex = row[2].length - 1;
-//     if (row[2][lastIndex] !== '"') {
-//       row[2] = row[2] + '"';
-//     }
-//     return row;
-//   })
-//   let clean = validate.join('\n');
-//   clean = clean + '\n';
-  // fs.appendFile('./photos_clean3.csv', clean, (err) => {
-  //       if (err) throw err;
-  //     })
-// })
 
-// fs.readFile('./cleanData/photos_clean2.csv', 'utf8', (err, data) => {
+
+//Read and write related.csv
+
+// fs.readFile('/Users/kevinliu/Desktop/SDC/rawData/related.csv', 'utf8', (err, data) => {
 //   if (err) throw err;
-//   console.log(data)
+//   const rows = data.split('\n');
+//   const dataEntrys = rows.map(row => row.split(','));
+//   const rmProducts = dataEntrys.filter(row => {
+//     return dropProductId.indexOf(row[1]) === -1 && dropProductId.indexOf(row[2]) === -1;
+//   })
+//   let clean = rmProducts.map(row => row.join(','));
+//   clean = clean.join('\n');
+//   fs.writeFile('/Users/kevinliu/Desktop/SDC/cleanData/related.csv', clean, (err) => {
+//     if (err) throw err;
+//     console.log('File created');
+//   })
 // })

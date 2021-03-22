@@ -1,7 +1,12 @@
 const { Client, Pool } = require('pg');
 
-const pool = new Pool();
+const pool = new Pool({
+  user: 'kevinliu',
+  host: 'localhost',
+  database: 'product',
+  port: 5432
+});
 
-pool.query('SELECT * FROM test')
-  .then(result => console.log(result.rows))
-  .catch(err => console.log(err))
+pool.connect();
+
+module.exports = pool;

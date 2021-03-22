@@ -52,6 +52,13 @@ CREATE TABLE skus (
   FOREIGN KEY (style_id) REFERENCES styles(style_id) ON DELETE CASCADE
 );
 
+CREATE TABLE related (
+  related_id  INT NOT NULL PRIMARY KEY,
+  product_id INT NOT NULL,
+  related_product_id INT NOT NULL,
+  FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE,
+  FOREIGN KEY (related_product_id) REFERENCES products(product_id) ON DELETE CASCADE
+);
 -- DROP DATABASE IF EXISTS product;
 
 -- CREATE DATABASE product;
