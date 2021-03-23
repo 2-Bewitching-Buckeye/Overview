@@ -19,7 +19,7 @@ CREATE TABLE styles (
   name VARCHAR(50) NOT NULL,
   sale_price FLOAT,
   original_price FLOAT NOT NULL,
-  default_style BOOL NOT NULL,
+  "default" BOOL NOT NULL,
   FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
 );
 
@@ -39,7 +39,7 @@ CREATE TABLE products_features (
 CREATE TABLE photos (
   photo_id SERIAL NOT NULL PRIMARY KEY,
   style_id INT,
-  image_url VARCHAR(400) NOT NULL,
+  url VARCHAR(400) NOT NULL,
   thumbnail_url VARCHAR(400) NOT NULL,
   FOREIGN KEY (style_id) REFERENCES styles(style_id) ON DELETE CASCADE
 );

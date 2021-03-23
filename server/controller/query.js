@@ -1,8 +1,9 @@
 const pool = require('../../connection/postgresConnection.js');
 
 exports.getProducts = (req, res) => {
+  const page = req.body.page || 1;
   const count = req.body.count || 5;
-  pool.query(`SELECT * FROM products LIMIT ${count}`)
+  pool.query(`SELECT * FROM products WHERE product_id BETWEEN ${page * 30 - 29} AND ${page * 30} LIMIT ${count}`)
   .then(result => {
     res.status(200).send(result.rows)
   })
@@ -35,11 +36,11 @@ exports.getProduct = (req, res) => {
 exports.getStyles = (req, res) => {
   const sql = `SELECT jsonb_agg(nested_results) AS results
   FROM (
-    SELECT s.style_id, s.name, s.original_price, s.sale_price, s.default_style,
+    SELECT s.style_id, s.name, s.original_price, s.sale_price, s.default,
       (
         SELECT jsonb_agg(nested_photos)
         FROM (
-          SELECT p.image_url, p.thumbnail_url
+          SELECT p.url, p.thumbnail_url
           FROM photos p
           WHERE p.style_id = s.style_id
         ) AS nested_photos
