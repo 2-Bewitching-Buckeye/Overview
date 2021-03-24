@@ -69,6 +69,7 @@ exports.getStyles = (req, res) => {
           const response = {product_id: req.params.product_id, results: styles};
           res.status(200).send(response);
         })
+        .catch(err => {throw err})
     })
     .catch(err => {throw err})
 }

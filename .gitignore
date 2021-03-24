@@ -1,3 +1,6 @@
 node_modules/
 rawData/
 cleanData/
+jest.config.js
+__tests__
+k6.js

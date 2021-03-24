@@ -12,11 +12,7 @@ export let options = {
 };
 
 export default function () {
-  const random = Math.floor(Math.random() * 10000000 +1)
-  // for (let i = 0; i < 1000; i++) {
-    http.get(`http://localhost:3000/products/${random}/styles`)
-  // }
-  console.log(random)
-  // http.get(`http://localhost:3000/products/${random}/styles`)
+  const random = Math.floor(Math.random() * 1000000 +1)
+  http.get(`http://localhost:3000/products/${random}/styles`)
   // sleep(1);
 }
